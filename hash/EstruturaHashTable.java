@@ -9,22 +9,41 @@ public class EstruturaHashTable implements EstruturaDeDados{
 
     @Override
     public boolean insert(int chave) {
-        // TODO quando inserir, se a posição estiver ocupada, o elemento NÃO é inserido e retorna false. Caso contrário, o elemento é inserido na posição calculada e retorna true.
-        return false;
-        
+        int keyHash = hash(chave);
+
+        if (tabela[keyHash] != null) {
+            return false;
+        } else {
+            tabela[keyHash] = chave;
+            return true;
+        }
     }
 
     @Override
     public boolean delete(int chave) {
-        // TODO quando inserir, se a posição estiver ocupada, torna o elemento da posição como null e retorna true. Caso contrário, retorna false.
-        return false;
-        
+        int keyHash = hash(chave);
+
+        if (tabela[keyHash] != null) {
+            tabela[keyHash] = null;
+            return true;
+        } else {
+            return false;
+        }
     }
 
     @Override
     public boolean search(int chave) {
-        // TODO se a posição estiver ocupada e valor é o mesmo (ou seja, tem que ser ambos), retorna true. Caso contrário, retorna true.
-        return false;
+        int keyHash = hash(chave);
+
+        if (tabela[keyHash] != null && tabela[keyHash] == chave) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private int hash(int key) {
+        return key % 1000;
     }
     
 }
